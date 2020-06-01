@@ -1,0 +1,20 @@
+---
+
+- name: "Install bashtop (debian)"
+  unarchive:
+    src: "{{ item.url }}"
+    dest: "/usr/local/bin"
+    remote_src: yes
+    creates: "/usr/local/bin/bashtop-0.8.23/{{ item.name }}"
+  with_items: "{{ install_bashtop.download[(ansible_os_family | lower) + '_' + (ansible_architecture | lower)] }}"
+  tags:
+    - "bashtop"
+
+- name: "Link binaries"
+  file:
+    src: "/usr/local/bin/bashtop-0.8.23/{{ item.name }}"
+    dest: "/usr/local/bin/{{ item.name }}"
+    state: link
+  with_items: "{{ install_bashtop.download[(ansible_os_family | lower) + '_' + (ansible_architecture | lower)] }}"
+  tags:
+    - "bashtop"

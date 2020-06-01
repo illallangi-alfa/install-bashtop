@@ -1,0 +1,8 @@
+---
+install_bashtop:
+  download:
+    common: &common_download
+      - name: bashtop
+        url: "https://github.com/aristocratos/bashtop/archive/v0.8.23.tar.gz"
+    debian_armv7l: *common_download
+    debian_x86_64: *common_download
